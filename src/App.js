@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Detail from './components/Detail.js';
+import Headers from './components/header/Header';
+import './../node_modules/bootstrap/dist/css/bootstrap.css';
+import { Provider } from './context';
+import { Consumer } from './context';
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider >
+        <Consumer>
+          {value => {
+            const { contacts } = value;
+            console.log(contacts);
+            return (
+              <React.Fragment  >
+                <Headers />
+                {
+                  contacts.map(row => (
+                    <Detail key={row.id} contact={row} />
+                  ))
+                }
+              </React.Fragment >
+            )
+          }
+          }
+        </Consumer>
+      </Provider >
     );
   }
 }

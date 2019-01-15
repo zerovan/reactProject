@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import uuid from 'uuid';
 class Headers extends Component {
-    state = {
-        name: "",
-        phone: "",
-    };
 
-    updateState = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        });
-    };
+    constructor(props) {
+        super(props);
+        this.nameInput = React.createRef();
+        this.phoneInput = React.createRef();
+    }
 
     onSubmitContact = (callback, e) => {
         e.preventDefault();
         const newContact = {
             id: uuid(),
-            name: this.state.name,
-            phone: this.state.phone,
+            name: this.nameInput.current.value,
+            phone: this.phoneInput.current.value,
         }
+
         const action = {
             type: 'ADD_CONTACT',
             payload: newContact,
@@ -27,8 +24,13 @@ class Headers extends Component {
         callback(action);
     }
 
+    static defaultProps = {
+        name: "محمد",
+        phone: "099999999"
+    }
+
     render() {
-        const { name, phone } = this.state;
+        const { name, phone } = this.props;
         return (
             <Consumer >
                 {value => {
@@ -43,12 +45,19 @@ class Headers extends Component {
                                         <input
                                             type="text" className="form-control"
                                             id="name"
-                                            value={name}
-                                            onChange={this.updateState} />
+                                            defaultValue={name}
+                                            ref={this.nameInput}
+                                        />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="phone">تلفن</label>
-                                        <input type="text" className="form-control" id="phone" value={phone} onChange={this.updateState} />
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="phone"
+                                            defaultValue={phone}
+                                            ref={this.phoneInput}
+                                        />
                                     </div>
                                     <button type="submit" className="btn btn-primary">افزودن</button>
                                 </form>
@@ -63,6 +72,6 @@ class Headers extends Component {
 
         );
     }
-
 }
+
 export default Headers;

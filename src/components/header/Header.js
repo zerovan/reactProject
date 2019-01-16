@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../context';
+import InputDryCode from './InputDryCode';
 import uuid from 'uuid';
 class Headers extends Component {
     state = {
@@ -38,18 +39,20 @@ class Headers extends Component {
                             <br />
                             <div className="container text-right" style={{ direction: 'rtl' }}>
                                 <form action="#" onSubmit={this.onSubmitContact.bind(this, dispatch)}>
-                                    <div className="form-group">
-                                        <label htmlFor="name">نام</label>
-                                        <input
-                                            type="text" className="form-control"
-                                            id="name"
-                                            value={name}
-                                            onChange={this.updateState} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="phone">تلفن</label>
-                                        <input type="text" className="form-control" id="phone" value={phone} onChange={this.updateState} />
-                                    </div>
+                                    <InputDryCode
+                                        type="text"
+                                        id="name"
+                                        value={name}
+                                        onChange={this.updateState}
+                                        label={"نام"}
+                                    />
+                                    <InputDryCode
+                                        type="text"
+                                        id="phone"
+                                        value={phone}
+                                        onChange={this.updateState}
+                                        label={"تلفن"}
+                                    />
                                     <button type="submit" className="btn btn-primary">افزودن</button>
                                 </form>
                             </div>

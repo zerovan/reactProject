@@ -6,6 +6,7 @@ class Headers extends Component {
     state = {
         name: "",
         phone: "",
+        error: {}
     };
 
     updateState = (e) => {
@@ -16,6 +17,24 @@ class Headers extends Component {
 
     onSubmitContact = (callback, e) => {
         e.preventDefault();
+
+        if (this.state.name == "") {
+            this.setState({
+                error: {
+                    name: "نام باید وارد شود",
+                }
+            });
+            return;
+        }
+        if (this.state.phone == "") {
+            this.setState({
+                error: {
+                    phone: "موبایل باید وارد شود",
+                }
+            });
+            return;
+        }
+
         const newContact = {
             id: uuid(),
             name: this.state.name,
@@ -26,10 +45,15 @@ class Headers extends Component {
             payload: newContact,
         }
         callback(action);
+        this.setState({
+            name: '',
+            phone: '',
+            error: {}
+        })
     }
 
     render() {
-        const { name, phone } = this.state;
+        const { name, phone, error } = this.state;
         return (
             <Consumer >
                 {value => {
@@ -45,6 +69,7 @@ class Headers extends Component {
                                         value={name}
                                         onChange={this.updateState}
                                         label={"نام"}
+                                        error={error.name}
                                     />
                                     <InputDryCode
                                         type="text"
@@ -52,6 +77,7 @@ class Headers extends Component {
                                         value={phone}
                                         onChange={this.updateState}
                                         label={"تلفن"}
+                                        error={this.state.error.phone}
                                     />
                                     <button type="submit" className="btn btn-primary">افزودن</button>
                                 </form>

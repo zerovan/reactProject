@@ -18,22 +18,23 @@ class Headers extends Component {
     onSubmitContact = (callback, e) => {
         e.preventDefault();
 
-        if (this.state.name == "") {
+        let flag = false;
+        let validator = {};
+        if (this.state.name === "") {
+            validator.name = "نام باید وارد شود";
+            flag = true;
+        }
+        if (this.state.phone === "") {
+            validator.phone = "موبایل باید وارد شود";
+            flag = true;
+        }
+        if (flag) {
             this.setState({
-                error: {
-                    name: "نام باید وارد شود",
-                }
+                error: validator
             });
             return;
         }
-        if (this.state.phone == "") {
-            this.setState({
-                error: {
-                    phone: "موبایل باید وارد شود",
-                }
-            });
-            return;
-        }
+
 
         const newContact = {
             id: uuid(),

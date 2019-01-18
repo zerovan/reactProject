@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-import Detail from './components/Detail.js';
+import Contacts from './components/Contacts';
+import ContactUs from './components/pages/contactUs';
+import NotFound from './components/pages/notFound';
+import NavBarTop from './components/navBar/navBarTop';
 import Headers from './components/header/Header';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Provider } from './context';
-import { Consumer } from './context';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
 
   render() {
     return (
       <Provider >
-        <Consumer>
-          {value => {
-            const { contacts } = value;
-            console.log(contacts);
-            return (
-              <React.Fragment  >
-                <Headers />
-                {
-                  contacts.map(row => (
-                    <Detail key={row.id} contact={row} />
-                  ))
-                }
-              </React.Fragment >
-            )
-          }
-          }
-        </Consumer>
+        <Router>
+          <React.Fragment  >
+            <NavBarTop />
+            <Switch>
+              <Route exact path="/add" component={Headers} />
+              <Route exact path="/details" component={Contacts} />
+              <Route exact path="/contact-us/:number" component={ContactUs} />
+              <Route component={NotFound} />
+            </Switch>
+          </React.Fragment >
+        </Router>
       </Provider >
     );
   }

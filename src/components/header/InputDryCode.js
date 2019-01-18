@@ -2,12 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'
 
-// const classNamehandler = (staticClassName, conditionalClassName) => {
-//     if (conditionalClassName.is - invalid != "")
-//         return staticClassName + " is-invalid";
-// }
-
-
 const InputdryCode = ({
     type,
     id,
@@ -28,7 +22,7 @@ const InputdryCode = ({
                 value={value}
                 onChange={onChange}
             />
-            <div class="invalid-feedback">
+            <div className="invalid-feedback">
                 {error}
             </div>
 
@@ -41,7 +35,7 @@ InputdryCode.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
-    error: PropTypes.string.isRequired,
+
 }
 
 export default InputdryCode;

@@ -18,7 +18,7 @@ class Headers extends Component {
     onSubmitContact = (callback, e) => {
         e.preventDefault();
 
-        if (this.state.name == "") {
+        if (this.state.name === "") {
             this.setState({
                 error: {
                     name: "نام باید وارد شود",
@@ -26,7 +26,7 @@ class Headers extends Component {
             });
             return;
         }
-        if (this.state.phone == "") {
+        if (this.state.phone === "") {
             this.setState({
                 error: {
                     phone: "موبایل باید وارد شود",
@@ -50,6 +50,7 @@ class Headers extends Component {
             phone: '',
             error: {}
         })
+        this.props.history.push("/details");
     }
 
     render() {

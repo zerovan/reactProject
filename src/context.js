@@ -15,6 +15,19 @@ const reducer = (state, action) => {
                 ...state,
                 contacts: [action.payload, ...state.contacts]
             };
+        case 'EDIT_CONTACT':
+            const contactClone = state.contacts;
+            state.contacts.forEach((row, index) => {
+                if (row.id == action.payload.id) {
+                    contactClone[index].name = action.payload.name;
+                    contactClone[index].phone = action.payload.phone;
+                }
+            });
+            return {
+                ...state,
+                contacts: contactClone,
+            }
+
         default:
             return state;
     }

@@ -9,7 +9,7 @@ import Headers from './components/header/Header';
 import ApiTest from './components/pages/apiTest';
 import './../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Provider } from './context';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
 
